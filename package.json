@@ -5,7 +5,7 @@
   "main": "lib/coralpay.js",
   "types": "lib/coralpay.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 0",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
@@ -16,11 +16,11 @@
     "postversion": "git push && git push --tags",
     "docgen": "typedoc --out docs src --excludeNotExported --excludePrivate --theme minimal --module commonjs"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["coralpay", "ussd", "payments", "nigeria"],
+  "author": "Peter Iyiola",
   "license": "ISC",
   "devDependencies": {
-    "husky": "^2.2.0",
+    "husky": "^2.3.0",
     "prettier": "^1.17.0",
     "tslint": "^5.16.0",
     "tslint-config-prettier": "^1.18.0",
