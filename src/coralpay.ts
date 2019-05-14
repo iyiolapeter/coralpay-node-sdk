@@ -78,7 +78,6 @@ const validateExistence = (obj: object, ...keys: string[]) => {
 };
 
 export class CoralPay {
-
 	private get baseUrl() {
 		return this.config.live ? PROD_URL : STAGING_URL;
 	}
