@@ -26,9 +26,9 @@ const CoralPay = require("coralpay-node-sdk")
 ```typescript
 const coral = new CoralPay({
 		privateKeyPath: "/assets/testpriv.key", //absolute path to your private key for decrypting responses
-		userName: "FishBone",
-		password: "1014051219@0",
-		merchantId: "1057FS010000001",
+		userName: "Skibo",
+		password: "1014054fgh@0",
+		merchantId: "1057FS010000021",
     terminalId: "1057FS01",
     trace: false // enable this to see log of requests and responses or pass your custom logging function
 });
