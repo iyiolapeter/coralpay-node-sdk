@@ -102,12 +102,12 @@ export class CoralPay {
 		}
 		if (this.config.trace === true) {
 			this.trace = true;
-		  } else if (typeof this.config.trace === "function") {
+		} else if (typeof this.config.trace === "function") {
 			this.trace = true;
 			this.logger = this.config.trace;
-		  } else {
+		} else {
 			this.trace = false;
-		  }
+		}
 		this.baseRequest = request.defaults({
 			baseUrl: this.baseUrl,
 			simple: false,
