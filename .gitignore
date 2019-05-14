@@ -1,0 +1,8 @@
+node_modules
+*.env
+config.json
+lib
+test.js
+assets/testpriv.key
+assets/testpub.key
+.DS_Store

@@ -1,0 +1,40 @@
+{
+  "name": "coralpay-node-sdk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/coralpay.js",
+  "types": "lib/coralpay.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags",
+    "docgen": "typedoc --out docs src --excludeNotExported --excludePrivate --theme minimal --module commonjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "^2.2.0",
+    "prettier": "^1.17.0",
+    "tslint": "^5.16.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.4.5"
+  },
+  "dependencies": {
+    "@types/node": "^12.0.0",
+    "@types/openpgp": "^4.4.4",
+    "@types/request-promise": "^4.1.43",
+    "gpg": "^0.6.0",
+    "locutus": "^2.0.10",
+    "openpgp": "^4.5.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
+    "shelljs": "^0.8.3"
+  }
+}
