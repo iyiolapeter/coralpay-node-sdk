@@ -17,6 +17,7 @@ const QUERY_TRANSACTION_API = "api/statusquery";
 
 const CORAL_ENCRYPTION_KEY = fs.readFileSync(path.resolve(__dirname, "./../assets/coral.pub.key"), "utf8");
 
+type Logger = (...args: any) => any;
 export interface CoralConfig {
 	privateKeyPath: string;
 	coralEncryptionKey?: string;
@@ -26,6 +27,7 @@ export interface CoralConfig {
 	password: string;
 	passphrase?: string;
 	live?: boolean;
+	trace?: boolean | Logger;
 }
 
 interface CoralKeyStore {
@@ -83,9 +85,9 @@ export class CoralPay {
 	}
 
 	public keyStore: Partial<CoralKeyStore> = { init: false };
-	private trace: boolean = true;
+	private trace: boolean;
 	// tslint:disable-next-line: no-console
-	private logger: any = console.log;
+	private logger: Logger = console.log;
 	private baseRequest: RequestAPI<request.RequestPromise, request.RequestPromiseOptions, RequiredUriUrl>;
 	constructor(private config: CoralConfig) {
 		validateExistence(config, "privateKeyPath", "merchantId", "terminalId", "userName", "password");
@@ -98,6 +100,14 @@ export class CoralPay {
 		if (this.config.coralEncryptionKey === undefined) {
 			this.config.coralEncryptionKey = CORAL_ENCRYPTION_KEY;
 		}
+		if (this.config.trace === true) {
+			this.trace = true;
+		  } else if (typeof this.config.trace === "function") {
+			this.trace = true;
+			this.logger = this.config.trace;
+		  } else {
+			this.trace = false;
+		  }
 		this.baseRequest = request.defaults({
 			baseUrl: this.baseUrl,
 			simple: false,
