@@ -19,7 +19,7 @@ import { CoralPay } from "coralpay-node-sdk"
 or 
 
 ```javascript
-const CoralPay = require("coralpay-node-sdk")
+const { CoralPay } = require("coralpay-node-sdk")
 ```
 
 #### Instantiate
