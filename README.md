@@ -8,7 +8,7 @@ coralpay-node-sdk requires gpg to be installed on the environment to run.
 
 
 ```sh
-$ npm install iyiolapeter/coralpay-node-sdk
+$ npm install --save iyiolapeter/coralpay-node-sdk
 ```
 
 ### Usage
