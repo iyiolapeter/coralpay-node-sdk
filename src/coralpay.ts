@@ -10,7 +10,7 @@ openpgp.config.ignore_mdc_error = true;
 openpgp.config.use_native = true;
 
 const STAGING_URL = "https://testdev.coralpay.com/cgateproxy/";
-const PROD_URL = "";
+const PROD_URL = "https://cgateweb.coralpay.com:567/";
 
 const INVOKE_REFERENCE_API = "api/invokereference";
 const QUERY_TRANSACTION_API = "api/statusquery";
