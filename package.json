@@ -31,7 +31,7 @@
     "@types/openpgp": "^4.4.4",
     "@types/request-promise": "^4.1.43",
     "gpg": "^0.6.0",
-    "locutus": "^2.0.10",
+    "locutus": "^2.0.15",
     "openpgp": "^4.5.1",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
