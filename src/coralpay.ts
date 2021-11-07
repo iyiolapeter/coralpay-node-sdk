@@ -14,6 +14,7 @@ const PROD_URL = "https://cgateweb.coralpay.com:567/";
 
 const INVOKE_REFERENCE_API = "api/invokereference";
 const QUERY_TRANSACTION_API = "api/statusquery";
+const QUERY_STATIC_REF_TRANSACTION_API = "api/StatusQuery2";
 
 const CORAL_ENCRYPTION_KEY = fs.readFileSync(path.resolve(__dirname, "./../assets/coral.pub.key"), "utf8");
 
@@ -216,6 +217,25 @@ export class CoralPay {
 			},
 		};
 		return await this.customRequest(METHOD.POST, QUERY_TRANSACTION_API, body);
+	}
+
+	public async queryStaticRefTransaction(payload: StatusQueryRequest) {
+		validateExistence(payload, "Amount", "TransactionID");
+		const { Amount, TransactionID } = payload;
+		const { userName: UserName, password: Password, terminalId: TerminalId, merchantId: MerchantId } = this.config;
+		const body = {
+			RequestHeader: {
+				UserName,
+				Password,
+			},
+			RequestDetails: {
+				TerminalId,
+				MerchantId,
+				Amount,
+				TransactionID,
+			},
+		};
+		return await this.customRequest(METHOD.POST, QUERY_STATIC_REF_TRANSACTION_API, body);
 	}
 
 	private async init() {
