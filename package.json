@@ -32,7 +32,7 @@
     "@types/request-promise": "^4.1.43",
     "gpg": "^0.6.0",
     "locutus": "^2.0.10",
-    "openpgp": "^4.5.1",
+    "openpgp": "4.5.1",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
     "shelljs": "^0.8.3"
