@@ -44,10 +44,19 @@ interface ApiResponse {
 	body: any;
 }
 
+export enum TransactionType {
+	PURCHASE = "0",
+	CASHOUT = "30",
+	CASHIN = "35",
+	BILL_PAYMENT = "50"
+}
+
 export interface InvokeReferenceRequest {
 	Channel: string;
 	Amount: number;
 	TraceID?: string;
+	TransactionType?: TransactionType;
+	SubMerchantName?: string;
 }
 
 export interface StatusQueryRequest {
@@ -180,7 +189,7 @@ export class CoralPay {
 
 	public async invokeReference(payload: InvokeReferenceRequest) {
 		validateExistence(payload, "Channel", "Amount");
-		const { Channel, Amount, TraceID } = payload;
+		const { Channel, Amount, TraceID, TransactionType, SubMerchantName } = payload;
 		const { userName: UserName, password: Password, terminalId: TerminalId, merchantId: MerchantId } = this.config;
 		const body = {
 			RequestHeader: {
@@ -192,6 +201,8 @@ export class CoralPay {
 				Channel,
 				Amount,
 				MerchantId,
+				TransactionType,
+				SubMerchantName
 			},
 		};
 		if (TraceID) {
