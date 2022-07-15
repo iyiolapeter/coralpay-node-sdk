@@ -1,52 +1,73 @@
 {
-  "name": "coralpay-node-sdk",
-  "version": "1.0.0",
-  "description": "",
-  "main": "lib/coralpay.js",
-  "types": "lib/coralpay.d.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0",
-    "build": "tsc",
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-    "lint": "tslint -p tsconfig.json",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint",
-    "preversion": "npm run lint",
-    "version": "npm run format && git add -A src",
-    "postversion": "git push && git push --tags",
-    "docgen": "typedoc --out docs src --excludeNotExported --excludePrivate --theme minimal --module commonjs"
-  },
-  "keywords": ["coralpay", "ussd", "payments", "nigeria"],
-  "author": "Peter Iyiola",
-  "license": "ISC",
-  "devDependencies": {
-    "husky": "^2.3.0",
-    "prettier": "^1.17.0",
-    "tslint": "^5.16.0",
-    "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.4.5"
-  },
-  "dependencies": {
-    "@types/node": "^12.0.0",
-    "@types/openpgp": "^4.4.4",
-    "@types/request-promise": "^4.1.43",
-    "gpg": "^0.6.0",
-    "locutus": "^2.0.10",
-    "openpgp": "^4.5.1",
-    "request": "^2.88.0",
-    "request-promise": "^4.2.4",
-    "shelljs": "^0.8.3"
-  },
-  "files": [
-    "assets/**/*",
-    "docs/**/*",
-    "lib/**/*",
-    "keymanager.js",
-    "keymanager.d.ts"
-  ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint && npm run format && npm run build"
+    "name": "coralpay-node-sdk",
+    "version": "2.0.2",
+    "description": "",
+    "main": "lib/coralpay.js",
+    "types": "lib/coralpay.d.ts",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 0",
+        "build": "tsc",
+        "lint": "eslint 'src/*.ts'",
+        "lint:fix": "eslint 'src/*.ts'  --fix",
+        "format": "prettier --write \"src/*.ts\" \"keymanager.js\" ",
+        "prepare": "npm run build",
+        "prepublishOnly": "npm run lint && npm run build",
+        "preversion": "npm run lint",
+        "version": "npm run format && git add -A src",
+        "postversion": "git push && git push --tags",
+        "docgen": "typedoc --out docs src --excludeNotExported --excludePrivate --theme minimal --module commonjs"
+    },
+    "keywords": [
+        "coralpay",
+        "cgate",
+        "bank",
+        "cconnect",
+        "sdk",
+        "nodejs",
+        "npm",
+        "ussd",
+        "payments",
+        "nigeria"
+    ],
+    "author": "Peter Iyiola",
+    "homepage": "https://github.com/iyiolapeter/coralpay-node-sdk",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/iyiolapeter/coralpay-node-sdk"
+    },
+    "license": "ISC",
+    "devDependencies": {
+        "@types/openpgp-legacy": "npm:@types/openpgp@^4.4.18",
+        "@typescript-eslint/eslint-plugin": "^5.30.6",
+        "@typescript-eslint/parser": "^5.30.6",
+        "eslint": "^8.19.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "husky": "^8.0.1",
+        "prettier": "^2.7.1",
+        "typescript": "^4.7.4"
+    },
+    "dependencies": {
+        "@openpgp/web-stream-tools": "^0.0.11",
+        "@types/node": "^16.0.0",
+        "axios": "^0.27.2",
+        "gpg": "^0.6.0",
+        "locutus": "^2.0.16",
+        "openpgp": "^5.3.1",
+        "openpgp-legacy": "npm:openpgp@4.5.1"
+    },
+    "engines": {
+        "npm": ">=6.9.0"
+    },
+    "files": [
+        "assets/**/*",
+        "lib/**/*",
+        "keymanager.js",
+        "keymanager.d.ts"
+    ],
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm run lint && npm run format && npm run build"
+        }
     }
-  }
 }
