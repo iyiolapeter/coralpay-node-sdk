@@ -10,6 +10,7 @@ const PRODUCTION_URL = "https://cgateweb.coralpay.com:567/";
 
 const INVOKE_REFERENCE_API = "api/invokereference";
 const QUERY_TRANSACTION_API = "api/statusquery";
+const REFUND_PAYMENT_API = "api/refund";
 
 const CORAL_TEST_ENCRYPTION_KEY = fs.readFileSync(path.resolve(__dirname, "./../assets/coral.test.pub.key"), "utf8");
 const CORAL_PROD_ENCRYPTION_KEY = fs.readFileSync(path.resolve(__dirname, "./../assets/coral.prod.pub.key"), "utf8");
@@ -81,6 +82,21 @@ export interface StatusQueryResponse {
 	TransactionID: string;
 	UserID: string;
 	TraceID: string;
+}
+
+export interface RefundPaymentRequest {
+	Reference: string;
+	Amount: number;
+	TransactionID: string;
+	TerminalId?: string;
+}
+
+export interface RefundPaymentResponse {
+	MerchantId: string;
+	TerminalId: string;
+	Amount: number;
+	Reference: string;
+	TransactionID: string;
 }
 
 export enum METHOD {
@@ -215,6 +231,26 @@ export class CoralPay {
 			},
 		};
 		return await this.sendEncryptedRequest<StatusQueryResponse>(METHOD.POST, QUERY_TRANSACTION_API, body);
+	}
+
+	public async refundPayment(payload: RefundPaymentRequest) {
+		validateExistence(payload, "Amount", "TransactionID", "Reference");
+		const { Amount, TransactionID, Reference, TerminalId } = payload;
+		const { userName: UserName, password: Password, terminalId: DefaultTerminalId, merchantId: MerchantId } = this.config;
+		const body = {
+			RequestHeader: {
+				UserName,
+				Password,
+			},
+			ReversalDetails: {
+				MerchantId,
+				TerminalId: TerminalId ?? DefaultTerminalId,
+				Reference,
+				Amount,
+				TransactionID,
+			},
+		};
+		return await this.sendEncryptedRequest<RefundPaymentResponse>(METHOD.POST, REFUND_PAYMENT_API, body);
 	}
 
 	private log(...args: any) {
